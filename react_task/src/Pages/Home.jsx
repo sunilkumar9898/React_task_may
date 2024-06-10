@@ -27,6 +27,8 @@ const Home = () => {
     };
 
     const [details, setdetails] = useState(intialValue);
+    const [data, setData] = useState([])
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setdetails((prev) => ({
@@ -48,10 +50,23 @@ const Home = () => {
                 "https://renderjsondata.onrender.com/student",
                 details
             );
+            getData()
         } catch (error) {
             console.log(error);
         }
     };
+
+    const getData = async () => {
+        try {
+            let res = await axios.get(
+                "https://renderjsondata.onrender.com/student"
+            );
+            setData(res.data)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
         AOS.init({
             once: true,
@@ -59,9 +74,9 @@ const Home = () => {
             duration: 1000,
             easing: "ease-out-cubic",
         });
+        getData();
     }, []);
 
-    
     return (
         <div>
             <div
@@ -97,7 +112,11 @@ const Home = () => {
             </div>
 
             {/* <--------------------------------Section of Form -------------------> */}
+            <div className="quteos">
 
+                खोल दो पंख मेरे कहता है परिंदा, अभी तो और उड़ान बाकी है, ज़मीन
+                नहीं है मंज़ील मेरी, अभी तो पूरा आसमान बाकी है
+            </div>
             <div
                 className="student_detials"
                 data-aos="zoom-in"
@@ -149,6 +168,20 @@ const Home = () => {
                                 <th>ACTION</th>
                             </tr>
                         </thead>
+                        <tbody>
+                            {data.map((ele, index) => (
+                                <tr key={ele.id}>
+                                    <td>{index + 1}</td>
+                                    <td>{ele.name}</td>
+                                    <td>{ele.course}</td>
+                                    <td>{ele.number}</td>
+                                    <td>
+                                        <button>Delete</button>
+                                        <button>Edit</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
                     </table>
                 </div>
             </div>

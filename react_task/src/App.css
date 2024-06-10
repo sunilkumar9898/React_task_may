@@ -78,14 +78,20 @@ body {
 /* <-----------------STUDENT_DETALS ____________________----------- */
 .student_detials {
     width: 90%;
-    margin: 50px auto;
+    margin: 20px auto;
     display: flex;
     gap: 40px;
 }
-
+.quteos{
+    text-align: center;
+    font-size: 30px;
+    width: 30%;
+    margin:20px auto;
+}
 .form {
     width: 40%;
     padding: 10px;
+margin-bottom: 100px;
 }
 .form h1 {
     padding: 40px 0px;
@@ -103,7 +109,7 @@ form {
     outline: none;
     column-gap: 20px;
     padding: 6px;
-    margin: 5px 0px;
+    margin: 10px 0px;
 }
 
 .form select {
@@ -139,6 +145,25 @@ label {
 .table {
     padding: 10px;
     width: 60%;
+        height: 500px;
+    
+     overflow: auto;
+    /* margin-bottom: 200px; */
+}
+
+.table::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+/* Optional: Hide scrollbar for non-WebKit browsers */
+.table {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.table::-webkit-scrollbar-thumb {
+    background: transparent;
 }
 .table h1 {
     padding: 42px 0px;
@@ -148,6 +173,7 @@ label {
 table {
     width: 100%;
     border-collapse: collapse;
+
 }
 
 table thead tr {
@@ -157,7 +183,11 @@ table thead tr {
 table thead tr th {
     padding: 10px;
 }
-
+table tbody tr td{
+    padding: 10px;
+    text-align: center;
+    background: green;
+}
 .footer {
     /* position: absolute;
     right: 0;
