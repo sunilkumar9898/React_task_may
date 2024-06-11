@@ -78,6 +78,10 @@ const Footer = () => {
                           </div>
                       </div>
                   </div>
+                  <div className="email_footer">
+                      <input type="email" placeholder="  Your Email Address " />
+                      <button>send</button>
+                  </div>
               </div>
           </footer>
       </div>

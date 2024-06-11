@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Serif+Text:ital@0;1&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
 * {
     padding: 0;
     margin: 0;
@@ -6,15 +7,15 @@
 }
 /* html {
     height: 100%;
-}
+} */
 body {
-    position: relative;
-    min-height: 100vh;
+    /* position: relative;
+    min-height: 100vh; */
     font-family: "DM Serif Text", serif;
     font-weight: 400;
     font-style: normal;
 
-} */
+}
 
 .navbar {
     display: flex;
@@ -264,7 +265,7 @@ ul{
 	list-style: none;
 }
 .footer{
-	background-color: #24262b;
+	background-color: #14140F;
     padding: 70px 0;
 }
 .footer-col{
@@ -323,7 +324,36 @@ ul{
 	background-color: #ffffff;
 }
 
-/*responsive*/
+
+.email_footer{
+    margin-top: 20px;
+
+    color: white;
+}
+.email_footer input{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: black;
+    outline: none;
+    color: whitesmoke;
+    border: 2px solid #34675C;
+}
+.email_footer button{
+    padding: 8px 15px;
+    margin-left: 5px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background-color: #49bb78;
+    color: white;
+    font-weight: 800;
+}
+.email_footer input::placeholder{
+    color: #d7d2d2;
+    font-weight: 600;
+
+
+}
 @media(max-width: 767px){
   .footer-col{
     width: 50%;
