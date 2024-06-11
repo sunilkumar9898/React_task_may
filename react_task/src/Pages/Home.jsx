@@ -228,7 +228,7 @@ const Home = () => {
                         <label htmlFor="name">NUMBER</label>
                         <input
                             type="text"
-                            placeholder="Name"
+                            placeholder="Number"
                             onChange={handleChange}
                             value={details.number}
                             name="number"
