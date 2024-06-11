@@ -3,6 +3,10 @@ import { Carousel } from "antd";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
+  import { ToastContainer, toast } from "react-toastify";
+
+  import "react-toastify/dist/ReactToastify.css";
+
 const contentStyle = {
     // height: "840px",
     color: "#fff",
@@ -14,20 +18,24 @@ const contentStyle = {
 
 const intialValue = {
     name: "",
+    fname: "",
     course: "",
     number: "",
 };
 
 const Home = () => {
+// const notify = () => ;
+
     const sliderimage = {
-        image: "https://images.unsplash.com/photo-1549057446-9f5c6ac91a04?q=80&w=1934&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        image1: "https://images.unsplash.com/photo-1565689157206-0fddef7589a2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        image: "https://images.unsplash.com/photo-1610552254576-9500a3e99999?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fHNjaG9vbHxlbnwwfHwwfHx8MA%3D%3D",
+        image1: "https://plus.unsplash.com/premium_photo-1671070290623-d6f76bdbb3db?q=80&w=1936&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         image2: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        image3: "https://media.istockphoto.com/id/1359499567/photo/young-woman-working-at-home-stock-photo.jpg?s=2048x2048&w=is&k=20&c=8EHJa7_f3JRuDarFsUgTJbIzKMopSI6pvMkITuQZhHI=",
+        image3: "https://images.unsplash.com/photo-1578593139939-cccb1e98698c?q=80&w=2093&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     };
 
     const [details, setdetails] = useState(intialValue);
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const [selectid, setSelectid] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -38,8 +46,33 @@ const Home = () => {
     };
 
     const hndleSubmit = (e) => {
-        e.preventDefault();
-        postData();
+        e.preventDefault()
+        if (details.name == "" || details.fname == "" || details.course == "" || details.number == "") {
+            toast.warn("PLease Fill UP All input Boxes value !", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "colored",
+            });
+            return
+        }
+
+        if (selectid) {
+            patchData(selectid);
+                toast.success("data successfully updated !", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    theme: "colored",
+                });
+
+        } else {
+            postData();
+                    toast.success("Data successfully inserted in database", {
+                        position: "top-right",
+                        autoClose: 5000,
+                        theme: "colored",
+                    });
+
+        }
 
         setdetails(intialValue);
     };
@@ -50,7 +83,7 @@ const Home = () => {
                 "https://renderjsondata.onrender.com/student",
                 details
             );
-            getData()
+            getData();
         } catch (error) {
             console.log(error);
         }
@@ -61,12 +94,49 @@ const Home = () => {
             let res = await axios.get(
                 "https://renderjsondata.onrender.com/student"
             );
-            setData(res.data)
+            setData(res.data);
         } catch (error) {
             console.log(error);
         }
     };
 
+    const delData = async (id) => {
+        try {
+            await axios.delete(
+                `https://renderjsondata.onrender.com/student/${id}`
+            );
+            getData();
+                toast.error("selected data deleted successfully !", {
+                    position: "top-right",
+                    autoClose: 5000,
+                    theme: "colored",
+                });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const updateData = (id) => {
+        let selectitem = data.find((ele) => ele.id === id);
+        if (selectitem) {
+            setdetails(selectitem);
+            setSelectid(id);
+        }
+    };
+
+    const patchData = async (id) => {
+        try {
+            await axios.patch(
+                `https://renderjsondata.onrender.com/student/${id}`,
+                details
+            );
+            getData();
+        } catch (error) {
+            console.log(error);
+        }
+        setdetails(intialValue);
+        setSelectid(null);
+    };
     useEffect(() => {
         AOS.init({
             once: true,
@@ -79,6 +149,9 @@ const Home = () => {
 
     return (
         <div>
+<ToastContainer />
+
+
             <div
                 className="carousel_div"
                 data-aos="zoom-out"
@@ -113,7 +186,6 @@ const Home = () => {
 
             {/* <--------------------------------Section of Form -------------------> */}
             <div className="quteos">
-
                 खोल दो पंख मेरे कहता है परिंदा, अभी तो और उड़ान बाकी है, ज़मीन
                 नहीं है मंज़ील मेरी, अभी तो पूरा आसमान बाकी है
             </div>
@@ -132,6 +204,16 @@ const Home = () => {
                             value={details.name}
                             name="name"
                         />
+
+                        <label htmlFor="name"> FATHER'S NAME</label>
+                        <input
+                            type="text"
+                            placeholder="father's name"
+                            onChange={handleChange}
+                            value={details.fname}
+                            name="fname"
+                        />
+
                         <label htmlFor="name">COURSE</label>
                         <select
                             id=""
@@ -152,7 +234,9 @@ const Home = () => {
                             name="number"
                         />
                         <div className="btn">
-                            <button onClick={hndleSubmit}>submit</button>
+                            <button onClick={hndleSubmit}>
+                                {selectid ? "Update" : "Submit"}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -163,9 +247,10 @@ const Home = () => {
                             <tr>
                                 <th>Sr.no</th>
                                 <th>Name</th>
+                                <th>Father's Name</th>
                                 <th>Course</th>
-                                <th>NUMBER</th>
-                                <th>ACTION</th>
+                                <th>Number</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -173,11 +258,17 @@ const Home = () => {
                                 <tr key={ele.id}>
                                     <td>{index + 1}</td>
                                     <td>{ele.name}</td>
+                                    <td>{ele.fname}</td>
                                     <td>{ele.course}</td>
                                     <td>{ele.number}</td>
-                                    <td>
-                                        <button>Delete</button>
-                                        <button>Edit</button>
+                                    <td className="btn_td">
+                                        <button
+                                            onClick={() => updateData(ele.id)}>
+                                            Edit
+                                        </button>
+                                        <button onClick={() => delData(ele.id)}>
+                                            Delete
+                                        </button>
                                     </td>
                                 </tr>
                             ))}
@@ -185,6 +276,7 @@ const Home = () => {
                     </table>
                 </div>
             </div>
+            <div>{/* <button onClick={notify}>Notify !</button> */}</div>
         </div>
     );
 };

@@ -26,10 +26,10 @@ const Navbar = () => {
                   <img src={userlogo.image} alt="" />
               </div>
               <div className="nav_link">
-                  <a href="#">Home</a>
-                  <a href="#">About</a>
-                  <a href="#">Contact</a>
-                  <a href="#">Service</a>
+                  <a className="cool-link"  href="#">Home</a>
+                  <a className="cool-link" href="#">About</a>
+                  <a className="cool-link" href="#">Contact</a>
+                  <a className="cool-link" href="#">Service</a>
               </div>
 
               <div className="hemburger" type="primary" onClick={showDrawer}>
