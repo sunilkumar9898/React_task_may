@@ -3,9 +3,9 @@ import { Carousel } from "antd";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
-  import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
-  import "react-toastify/dist/ReactToastify.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const contentStyle = {
     // height: "840px",
@@ -24,7 +24,7 @@ const intialValue = {
 };
 
 const Home = () => {
-// const notify = () => ;
+    // const notify = () => ;
 
     const sliderimage = {
         image: "https://images.unsplash.com/photo-1610552254576-9500a3e99999?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fHNjaG9vbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -46,32 +46,35 @@ const Home = () => {
     };
 
     const hndleSubmit = (e) => {
-        e.preventDefault()
-        if (details.name == "" || details.fname == "" || details.course == "" || details.number == "") {
+        e.preventDefault();
+        if (
+            details.name == "" ||
+            details.fname == "" ||
+            details.course == "" ||
+            details.number == ""
+        ) {
             toast.warn("PLease Fill UP All input Boxes value !", {
                 position: "top-right",
                 autoClose: 5000,
                 theme: "colored",
             });
-            return
+            return;
         }
 
         if (selectid) {
             patchData(selectid);
-                toast.success("data successfully updated !", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    theme: "colored",
-                });
-
+            toast.success("data successfully updated !", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "colored",
+            });
         } else {
             postData();
-                    toast.success("Data successfully inserted in database", {
-                        position: "top-right",
-                        autoClose: 5000,
-                        theme: "colored",
-                    });
-
+            toast.success("Data successfully inserted in database", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "colored",
+            });
         }
 
         setdetails(intialValue);
@@ -106,11 +109,11 @@ const Home = () => {
                 `https://renderjsondata.onrender.com/student/${id}`
             );
             getData();
-                toast.error("selected data deleted successfully !", {
-                    position: "top-right",
-                    autoClose: 5000,
-                    theme: "colored",
-                });
+            toast.error("selected data deleted successfully !", {
+                position: "top-right",
+                autoClose: 5000,
+                theme: "colored",
+            });
         } catch (error) {
             console.log(error);
         }
@@ -149,8 +152,7 @@ const Home = () => {
 
     return (
         <div>
-<ToastContainer />
-
+            <ToastContainer />
 
             <div
                 className="carousel_div"
@@ -254,24 +256,37 @@ const Home = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {data.map((ele, index) => (
-                                <tr key={ele.id}>
-                                    <td>{index + 1}</td>
-                                    <td>{ele.name}</td>
-                                    <td>{ele.fname}</td>
-                                    <td>{ele.course}</td>
-                                    <td>{ele.number}</td>
-                                    <td className="btn_td">
-                                        <button
-                                            onClick={() => updateData(ele.id)}>
-                                            Edit
-                                        </button>
-                                        <button onClick={() => delData(ele.id)}>
-                                            Delete
-                                        </button>
+                            {data.length === 0 ? (
+                                <tr>
+                                    <td
+                                        colSpan="6"
+                                        style={{ textAlign: "center",marginTop:"50px",fontSize:"30px" }}>
+                                        No Data Available
                                     </td>
                                 </tr>
-                            ))}
+                            ) : (
+                                data.map((ele, index) => (
+                                    <tr key={ele.id}>
+                                        <td>{index + 1}</td>
+                                        <td>{ele.name}</td>
+                                        <td>{ele.fname}</td>
+                                        <td>{ele.course}</td>
+                                        <td>{ele.number}</td>
+                                        <td className="btn_td">
+                                            <button
+                                                onClick={() =>
+                                                    updateData(ele.id)
+                                                }>
+                                                Edit
+                                            </button>
+                                            <button
+                                                onClick={() => delData(ele.id)}>
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
                         </tbody>
                     </table>
                 </div>
