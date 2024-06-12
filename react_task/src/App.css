@@ -347,6 +347,7 @@ ul{
     background-color: #49bb78;
     color: white;
     font-weight: 800;
+    cursor: pointer;
 }
 .email_footer input::placeholder{
     color: #d7d2d2;

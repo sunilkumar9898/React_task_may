@@ -4,7 +4,6 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import { ToastContainer, toast } from "react-toastify";
-
 import "react-toastify/dist/ReactToastify.css";
 
 const contentStyle = {
@@ -25,6 +24,10 @@ const intialValue = {
 
 const Home = () => {
     // const notify = () => ;
+
+
+
+
 
     const sliderimage = {
         image: "https://images.unsplash.com/photo-1610552254576-9500a3e99999?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nzl8fHNjaG9vbHxlbnwwfHwwfHx8MA%3D%3D",
