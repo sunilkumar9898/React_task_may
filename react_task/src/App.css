@@ -120,7 +120,7 @@ text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue;
 .form {
     width: 40%;
     padding: 10px;
-        height: 570px;
+        height: 535px;
 margin-bottom: 100px;
 box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
 }
@@ -489,6 +489,11 @@ table thead tr {
     form {
         width: 100%;
     }
+    .form h1 {
+    padding: 40px 0px;
+    color: #010221;
+    font-size: 25px;
+}
     .table {
     padding: 10px;
     width: 100%;
@@ -500,6 +505,11 @@ table thead tr {
 .student_detials {
     width: 98%;
     gap: 10px;
+}
+.form h1 {
+    padding: 40px 0px;
+    color: #010221;
+    font-size: 25px;
 }
 .table {
     padding: 0px;
